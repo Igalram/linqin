@@ -1,0 +1,66 @@
+#headerfirst {
+    color: Darkblue;
+    font-family: lobster;
+    text-align: center;
+    font-size: 3rem;
+}
+
+body {
+    background-color: darkblue;
+    font-size: 1.25em;
+}
+
+.jumbotron {
+    margin-top: 2vh;
+    width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input {
+    height: 64px;
+    width: 100%;
+  
+    margin-bottom: 10px;
+    
+}
+
+.col10 {
+    width: 10%;
+    display: inline-block;
+    margin: 0px;
+
+
+}
+
+.col80 {
+    width: 75%;
+    display: inline-block;
+    margin: 0px;
+}
+
+.done  {
+    color: lightgray;
+    text-decoration-style: line-through;
+
+    
+}
+
+.active {
+    color: darkblue;
+}
+
+.btn-group {
+    margin-top: 10px;
+    margin-left: 0px;
+    
+
+}
+
+#counter {
+    margin-right: 0px;
+    text-align: right;
+}
+
+
+
