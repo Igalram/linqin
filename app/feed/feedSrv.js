@@ -4,6 +4,10 @@ app.factory('feedSrv', function($http, $log, $q) {
 
     console.log (testSrv);
 
+    return {
+        
+        } 
+
     
 
 });
