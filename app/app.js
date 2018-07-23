@@ -1,4 +1,4 @@
-var app = angular.module("toDoApp", ["ngRoute"]); 
+var app = angular.module("linquinApp", ["ngRoute"]); 
 
 
 
@@ -6,7 +6,12 @@ app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
       templateUrl: 'app/home.html',
-      controller: 'toDoCtrl'
+      controller: 'homeCtrl'
+    })
+
+    .when('/feed.html', {
+      templateUrl: 'app/feed/feed.html',
+      controller: 'feedCtrl'
     })
 
 
