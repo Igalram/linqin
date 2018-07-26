@@ -1,17 +1,13 @@
 <html>
 
   <head>
-      <script>
-          $(document).ready(function() {
-              console.log( "document loaded" );
-          });  
-      
-      </script>
+      <script src="redirect.js"></script>
+   
   
  </head>
 
 
-  <body>
+  <body onload="handleToken(window.location.href)">
     <h1>redirected here</h1>
   </body>
 
