@@ -5,7 +5,7 @@ var app = angular.module("linquinApp", ["ngRoute"]);
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
-      templateUrl: 'app/home.html',
+      templateUrl: 'app/home/home.html',
       controller: 'homeCtrl'
     })
 
