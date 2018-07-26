@@ -13,7 +13,7 @@ app.config(function($routeProvider) {
       templateUrl: 'app/feed/feed.html',
       controller: 'feedCtrl'
     })
-
+/*
     .when('/access_token=:accessToken', {
       template: '',
       controller: function ($location,$rootScope) {
@@ -32,7 +32,7 @@ app.config(function($routeProvider) {
         $location.path("/about");
       }
     })
-
+*/
 
     .otherwise({
       redirectTo: '/'
