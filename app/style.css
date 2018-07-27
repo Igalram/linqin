@@ -71,3 +71,20 @@ text-align: center;
 margin-left: auto;
 
 }
+
+.userInfo {
+    width: 100%;
+}
+
+.userInfo.img {
+    width: 30%;
+    height: auto;
+    border-radius: 50%;
+    max-width: 150px;
+    display: inline-block;
+}
+
+.info {
+    display: inline-block;
+    width: 50%;
+}

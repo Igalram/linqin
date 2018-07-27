@@ -1,8 +1,14 @@
-<div class="jumbotron">
-    <h1> Your feed goes here!</h1>
-</div>
+<h1> Your Instagram feed goes here!</h1>
 
-
-<div>
-    <p>what</p>
-</div>
+<instagram-profile></instagram-profile>
+<script type="text/ng-template" id="instagramTemplate">
+<article class="instagramFeed">
+    <div class="userInfo">
+        <img class="userProfile" ng-src="{{instagramFeed.profile_picture}}"/>
+        <div class="info">
+            <p>{{instagramFeed.username}}</p>
+            <p>{{instagramFeed.full_name}}</p>
+        </div>
+    </div>
+</article>
+</script>
