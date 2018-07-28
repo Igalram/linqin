@@ -88,3 +88,18 @@ margin-left: auto;
     display: inline-block;
     width: 50%;
 }
+
+.instagramFeed, .instagram_container {
+    width: 100%;
+}
+
+.slot {
+    width: 30%; 
+    margin: 1%;
+    display: inline-block;
+}
+
+.slot img {
+    width: 100%;
+    height: auto;
+}

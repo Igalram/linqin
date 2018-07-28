@@ -6,9 +6,12 @@ angular.module("linquinApp").directive('instagramProfile', function () {
         restrict: "E",
         controllerAs: "instagramFeed",
         templateUrl: "instagramTemplate",
+        transclude: true,
         controller: function ($scope, $http) {
 
             var instagramFeed = this;
+            instagramFeed.content = [];
+
             $http({
                 url: 'https://api.instagram.com/v1/users/self/media/recent',
                 params: {
@@ -22,6 +25,13 @@ angular.module("linquinApp").directive('instagramProfile', function () {
                 instagramFeed.full_name = userInfo.full_name;
                 instagramFeed.username = userInfo.username;
                 instagramFeed.profile_picture = userInfo.profile_picture;
+
+                //user Images
+                angular.forEach(response.data.data, function (Object, key) {
+                    instagramFeed.content[key] = {};
+                    instagramFeed.content[key].imageUrl = object.images.standard_resolution.url;
+                    instagramFeed.content[key].instagramLink = object.link;
+                })
             })
         }
     }
