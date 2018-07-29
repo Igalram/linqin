@@ -37,39 +37,45 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
         console.log("username" + userInfo.username);
 
-        $scope.content = response.data;
-        console.log($scope.content);
+        //user Images
+        angular.forEach(response.data.data, function (Object, key) {
+            $scope.content[key] = {};
+            $scope.content[key].imageUrl = object.images.standard_resolution.url;
+            $scope.content[key].instagramLink = object.link;
+            $scope.content = response.data;
+            console.log($scope.content);
 
-    }, function (error) {
-        console.error(error);
-    })
-
-    console.log("user Info:" + $scope.userInfo);
-
-    function Post(id, userId, img, date, likes, link, location) {
-        this.id = id;
-        this.userId = userId;
-        this.img = img;
-        this.date = date;
-        this.likes = likes;
-        this.link = link;
-        this.location = location;
-
-    }
-
-    $scope.posts = [];
-    $http.get('/linqin/app/feed/feed.json').then(function (response) {
-        response.data.data.forEach(function (plainObj) {
-            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
-            $scope.posts.push(post);
+        }, function (error) {
+            console.error(error);
         })
 
-    }, function(error) {console.error(error);
-    
+        console.log("user Info:" + $scope.userInfo);
+
+        function Post(id, userId, img, date, likes, link, location) {
+            this.id = id;
+            this.userId = userId;
+            this.img = img;
+            this.date = date;
+            this.likes = likes;
+            this.link = link;
+            this.location = location;
+
+        }
+
+        $scope.posts = [];
+        $http.get('/linqin/app/feed/feed.json').then(function (response) {
+            response.data.data.forEach(function (plainObj) {
+                var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+                $scope.posts.push(post);
+            })
+
+        }, function (error) {
+            console.error(error);
+
+        });
+
+
     });
-
-
-});
 
 
 
