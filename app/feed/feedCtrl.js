@@ -8,9 +8,11 @@
 
 app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
 
-    $scope.getFeed(token) = function () {
-        window.alert("Hi Feed!");
+    $scope.getFeed = function (token) {
+        window.alert(token);
     }
+
+
     $scope.testfeedCtrl = "try try feed Ctrl"
     console.log($scope.testfeedCtrl);
 
