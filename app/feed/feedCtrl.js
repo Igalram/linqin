@@ -43,7 +43,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     console.log("user Info:" + $scope.userInfo);
 
     function Post(id, userId, img, thumb, date, likes, link, location) {
-        thid.id = id;
+        this.id = id;
         this.userId = userId;
         this.img = img;
         this.thumb = thumb;
