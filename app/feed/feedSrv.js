@@ -1,14 +1,14 @@
-// app.factory('feedSrv', function($http, $log, $q) {
+app.factory('feedSrv', function ($http, $log, $q) {
 
-//     var testSrv= "do you see feedSrv service???";
+    var testSrv = "do you see feedSrv service???";
 
-//     console.log (testSrv);
+    console.log(testSrv);
 
-//     return {
-        
-//         } 
+    return {
 
-    
+    }
 
-// });
+
+
+});
 
