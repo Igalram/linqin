@@ -56,7 +56,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     $scope.posts = [];
     $http.get('/linqin/app/feed/feed.json').then(function (response) {
-        response.data.forEach(function (plainObj) {
+        response.data.data.forEach(function (plainObj) {
             var post = new Post(plainObj.id, plainObj.userId, plainObj.img, plainObj.thumb, plainObj.date, plainObj.numLikes, plainObj.link, plainObj.location);
             $scope.posts.push(post);
         })
