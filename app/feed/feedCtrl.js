@@ -27,7 +27,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     // window.alert($scope.token);
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
     $http.get(request).then(function (response) {
-        $scope.content = response.data.data;
+        //$scope.content = response.data;
 
         //userInfo
         var userInfo = response.data.data[0].user;
@@ -65,7 +65,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     }
 
     $scope.posts = [];
-    $http.get('/linqin/app/feed/feed.json').then(function (response) {
+    $http.get(request).then(function (response) {
         response.data.data.forEach(function (plainObj) {
             var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
             $scope.posts.push(post);
