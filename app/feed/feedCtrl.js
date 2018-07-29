@@ -8,8 +8,8 @@
 
 app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
 
-    getFeed = function () {
-        window.alert();
+    $scope.getFeed = function (token) {
+        window.alert(token);
     }
 
 
