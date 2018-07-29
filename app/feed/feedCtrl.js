@@ -32,7 +32,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         //userInfo
         var userInfo = response.data.data[0].user;
         console.log("username" + userInfo.full_name);
-        
+
         $scope.content = response.data;
         console.log($scope.content);
 
@@ -42,7 +42,29 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     console.log("user Info:" + $scope.userInfo);
 
+    function Post(id, userId, img, thumb, date, likes, link, location) {
+        thid.id = id;
+        this.userId = userId;
+        this.img = img;
+        this.thumb = thumb;
+        this.date = date;
+        this.numLikes = numLikes;
+        this.link = link;
+        this.location = location;
+
+    }
+
+    $scope.posts = [];
+    $http.get('feed.json').then(function (response) {
+        response.data.forEach(function (plainObj) {
+            var post = new Post(plainObj.id, plainObj.userId, plainObj.img, plainObj.thumb, plainObj.date, plainObj.numLikes, plainObj.link, plainObj.location);
+            $scope.posts.push(post);
+        });
     
+        
+        }
+    }
+
 
 
     //console.log("$scope.content: " + $scope.content);
@@ -51,7 +73,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
 
     // $scope.getFeed = function (token) {
-        
+
     //     $scope.token = localStorage.getItem("token");
     //     window.alert($scope.token);
     //     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
@@ -62,7 +84,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     //         //userInfo
     //         var userInfo = response.data.data[0].user;
     //         console.log("username" + userInfo.full_name);
-         
+
 
     //         async.resolve(request);
     //     }, function (error) {
