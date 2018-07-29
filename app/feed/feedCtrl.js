@@ -22,7 +22,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     $scope.content = [];
 
     $scope.getFeed = function (token) {
-        window.alert("getting into getFeed function");
+        window.alert("getting into getFeed function with q");
         $scope.token = localStorage.getItem("token");
         var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
         var async = $q.defer();
