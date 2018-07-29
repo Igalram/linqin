@@ -31,7 +31,11 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
         //userInfo
         var userInfo = response.data.data[0].user;
-        console.log("username" + userInfo.full_name);
+        $scope.userName = userInfo.username;
+        $scope.profilePicture = userInfo.profile_picture;
+        $scope.fullName = userInfo.fullName;
+
+        console.log("username" + userInfo.username);
 
         $scope.content = response.data;
         console.log($scope.content);
