@@ -23,9 +23,18 @@ app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
 
     $scope.getFeed = function (token) {
         $scope.token = localStorage.getItem("token");
-        var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token="+$scope.token;
-        window.alert("rrr:"+request);
-        
+        var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
+        var async = $q.defer();
+        $http.get(request).then(function (response) {
+            async.resolve(request);
+        }, function(error) {
+            console.error(error);
+            async.reject("Failed to get feed");
+        })
+
+        window.alert("the requeat is:" + request);
+        console.log($scope.content);
+        return async.promise;
     }
 
     // return {
