@@ -9,16 +9,24 @@
 app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
 
     $scope.test = "testtest";
-    $scope.getFeed = function(token){
-        window.alert("the new token is");
-        $scope.token = localStorage.getItem("token");
-        window.alert($scope.token);
-    }
+    // $scope.getFeed = function (token) {
+    //     window.alert("the new token is");
+    //     $scope.token = localStorage.getItem("token");
+    //     window.alert($scope.token);
+    // }
 
 
     $scope.testfeedCtrl = "try try feed Ctrl"
     console.log($scope.testfeedCtrl);
 
+    $scope.instagramFeed.content = [];
+
+    $scope.getFeed = function (token) {
+        $scope.token = localStorage.getItem("token");
+        var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token="+$scope.token;
+        window.alert(request);
+        
+    }
 
     // return {
     //     restrict: "E",
