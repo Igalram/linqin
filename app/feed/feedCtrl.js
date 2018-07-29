@@ -20,6 +20,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     console.log($scope.testfeedCtrl);
 
     $scope.content = [];
+    $scope.userInfo = {};
 
     $scope.getFeed = function (token) {
         window.alert("getting into getFeed function with q");
@@ -27,6 +28,14 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
         var async = $q.defer();
         $http.get(request).then(function (response) {
+            $scope.content = response.data;
+
+            //userInfo
+            var userInfo = response.data.data[0].user;
+            content.full_name = userInfo.full_name;
+            content.username = userInfo.username;
+            content.profile_picture = userInfo.profile_picture;
+
             async.resolve(request);
         }, function (error) {
             console.error(error);
@@ -34,7 +43,8 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         })
 
         window.alert("the requeat is:" + request);
-        console.log("$scope.content: " + $scope.content);
+        console.log("user Info:" + $scope.userInfo);
+        //console.log("$scope.content: " + $scope.content);
         return async.promise;
     }
 
