@@ -21,7 +21,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     $scope.content = [];
     $scope.userInfo = {};
-    window.alert("getting into getFeed function with q3");
+    window.alert("getting into getFeed function with q4");
     $scope.getFeed = function (token) {
         
         $scope.token = localStorage.getItem("token");
