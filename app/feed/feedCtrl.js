@@ -19,12 +19,12 @@ app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
     $scope.testfeedCtrl = "try try feed Ctrl"
     console.log($scope.testfeedCtrl);
 
-    $scope.instagramFeed.content = [];
+    $scope.content = [];
 
     $scope.getFeed = function (token) {
         $scope.token = localStorage.getItem("token");
         var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token="+$scope.token;
-        window.alert(request);
+        window.alert("rrr:"+request);
         
     }
 
