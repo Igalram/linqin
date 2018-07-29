@@ -47,7 +47,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         this.userId = userId;
         this.img = img;
         this.date = date;
-        this.numLikes = numLikes;
+        this.likes = likes;
         this.link = link;
         this.location = location;
 
