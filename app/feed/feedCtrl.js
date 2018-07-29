@@ -24,11 +24,8 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     //window.alert("getting into getFeed function with q5");
 
     $scope.token = localStorage.getItem("token");
-    // window.alert($scope.token);
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
     $http.get(request).then(function (response) {
-        //$scope.content = response.data;
-
         //userInfo
         var userInfo = response.data.data[0].user;
         $scope.userName = userInfo.username;
@@ -36,13 +33,6 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         $scope.fullName = userInfo.fullName;
 
         console.log("username" + userInfo.username);
-
-    
-        // angular.forEach(response.data.data, function (Object, key) {
-        //     $scope.content[key] = {};
-        //     $scope.content[key].imageUrl = object.images.standard_resolution.url;
-        //     $scope.content[key].instagramLink = object.link;
-        // })
         
         $scope.content = response.data;
         console.log($scope.content);
