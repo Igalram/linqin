@@ -41,6 +41,10 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     })
 
     console.log("user Info:" + $scope.userInfo);
+
+    
+
+
     //console.log("$scope.content: " + $scope.content);
 
 
