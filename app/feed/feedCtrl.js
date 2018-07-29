@@ -6,7 +6,7 @@
 // })
 
 
-app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
+app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     $scope.test = "testtest";
     // $scope.getFeed = function (token) {
