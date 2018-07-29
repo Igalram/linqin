@@ -59,11 +59,18 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         response.data.forEach(function (plainObj) {
             var post = new Post(plainObj.id, plainObj.userId, plainObj.img, plainObj.thumb, plainObj.date, plainObj.numLikes, plainObj.link, plainObj.location);
             $scope.posts.push(post);
-        });
+        })
+
+    }, function(error) {console.error(error);
     
-        
-        }
-    }
+    });
+
+
+});
+
+
+
+
 
 
 
@@ -129,10 +136,3 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     //             })
     //         })
     //     }
-    // }
-
-
-
-});
-
-
