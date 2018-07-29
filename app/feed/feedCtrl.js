@@ -21,10 +21,10 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     $scope.content = [];
     $scope.userInfo = {};
-    window.alert("getting into getFeed function with q5");
+    //window.alert("getting into getFeed function with q5");
 
     $scope.token = localStorage.getItem("token");
-    window.alert($scope.token);
+    // window.alert($scope.token);
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
     $http.get(request).then(function (response) {
         //$scope.content = response.data;

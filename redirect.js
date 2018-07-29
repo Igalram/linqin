@@ -7,7 +7,7 @@ function handleToken(url) {
     }
 
     token = getSecondPart(url);
-    window.alert("rediredt:"+ token);
+    //window.alert("rediredt:"+ token);
     localStorage.setItem("token", token);
 
     window.location.replace("https://igalram.github.io/linqin/#!/feed.html")
