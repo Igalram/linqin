@@ -22,30 +22,54 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     $scope.content = [];
     $scope.userInfo = {};
     window.alert("getting into getFeed function with q5");
-    $scope.getFeed = function (token) {
-        
-        $scope.token = localStorage.getItem("token");
-        window.alert($scope.token);
-        var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
-        var async = $q.defer();
-        $http.get(request).then(function (response) {
-            //$scope.content = response.data;
 
-            //userInfo
-            var userInfo = response.data.data[0].user;
-            console.log("username" + userInfo.full_name);
+    $scope.token = localStorage.getItem("token");
+    window.alert($scope.token);
+    var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
+    $http.get(request).then(function (response) {
+        //$scope.content = response.data;
+
+        //userInfo
+        var userInfo = response.data.data[0].user;
+        console.log("username" + userInfo.full_name);
+        
+        $scope.content = response.data;
+        console.log($scope.content);
+
+    }, function (error) {
+        console.error(error);
+    })
+
+    console.log("user Info:" + $scope.userInfo);
+    //console.log("$scope.content: " + $scope.content);
+
+
+
+
+    // $scope.getFeed = function (token) {
+        
+    //     $scope.token = localStorage.getItem("token");
+    //     window.alert($scope.token);
+    //     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
+    //     var async = $q.defer();
+    //     $http.get(request).then(function (response) {
+    //         //$scope.content = response.data;
+
+    //         //userInfo
+    //         var userInfo = response.data.data[0].user;
+    //         console.log("username" + userInfo.full_name);
          
 
-            async.resolve(request);
-        }, function (error) {
-            console.error(error);
-            async.reject("Failed to get feed");
-        })
+    //         async.resolve(request);
+    //     }, function (error) {
+    //         console.error(error);
+    //         async.reject("Failed to get feed");
+    //     })
 
-        console.log("user Info:" + $scope.userInfo);
-        //console.log("$scope.content: " + $scope.content);
-        return async.promise;
-    }
+    //     console.log("user Info:" + $scope.userInfo);
+    //     //console.log("$scope.content: " + $scope.content);
+    //     return async.promise;
+    // }
 
     // return {
     //     restrict: "E",
