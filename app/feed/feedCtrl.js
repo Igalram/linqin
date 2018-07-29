@@ -45,6 +45,6 @@ app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
     console.log($scope.testfeedCtrl);
 
 
-    });
+});
 
 
