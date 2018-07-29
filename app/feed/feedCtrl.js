@@ -10,7 +10,7 @@ app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
 
     $scope.test = "testtest";
     $scope.getFeed = function(token){
-        window.alert("the token is");
+        window.alert("the new token is");
         $scope.token = localStorage.getItem("token");
         window.alert($scope.token);
     }
