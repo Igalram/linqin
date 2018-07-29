@@ -42,11 +42,10 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     console.log("user Info:" + $scope.userInfo);
 
-    function Post(id, userId, img, thumb, date, likes, link, location) {
+    function Post(id, userId, img, date, likes, link, location) {
         this.id = id;
         this.userId = userId;
         this.img = img;
-        this.thumb = thumb;
         this.date = date;
         this.numLikes = numLikes;
         this.link = link;
@@ -57,7 +56,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     $scope.posts = [];
     $http.get('/linqin/app/feed/feed.json').then(function (response) {
         response.data.data.forEach(function (plainObj) {
-            var post = new Post(plainObj.id, plainObj.userId, plainObj.img, plainObj.thumb, plainObj.date, plainObj.numLikes, plainObj.link, plainObj.location);
+            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
             $scope.posts.push(post);
         })
 
