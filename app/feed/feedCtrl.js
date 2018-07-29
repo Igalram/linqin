@@ -6,12 +6,13 @@
 // })
 
 
-app.controller('feedCtrl', function ($scope, $http, $location, $localStorage, feedSrv) {
+app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
 
     $scope.test = "testtest";
     $scope.getFeed = function(token){
         window.alert("the token is");
-        window.alert($localStorage.token);
+        var token = localStorage.getItem("token");
+        window.alert(token);
     }
 
 
