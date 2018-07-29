@@ -5,9 +5,11 @@ function handleToken(url) {
     function getSecondPart(x) {
         return x.split('=')[1];
     }
-    $rootScope.token = getSecondPart(url);
-    window.alert("rediredt:"+ $rootScope.token);
-    
+
+    token = getSecondPart(url);
+    window.alert("rediredt:"+ token);
+    localStorage.setItem("token", token);
+
     window.location.replace("https://igalram.github.io/linqin/#!/feed.html")
     return
 }
