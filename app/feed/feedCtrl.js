@@ -39,9 +39,9 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
         ////
         angular.forEach(response.data.data, function (Object, key) {
-            instagramFeed.content[key] = {};
-            instagramFeed.content[key].imageUrl = object.images.standard_resolution.url;
-            instagramFeed.content[key].instagramLink = object.link;
+            content[key] = {};
+            content[key].imageUrl = object.images.standard_resolution.url;
+            content[key].instagramLink = object.link;
         })
         /////
         $scope.content = response.data;
