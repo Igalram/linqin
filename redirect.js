@@ -8,5 +8,6 @@ function handleToken(url) {
     token = getSecondPart(url);
     console.log(token)
     
+    window.location.replace("https://igalram.github.io/linqin/#!/feed.html")
     return
 }
