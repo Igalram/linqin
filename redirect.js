@@ -5,8 +5,8 @@ function handleToken(url) {
     function getSecondPart(x) {
         return x.split('=')[1];
     }
-    token = getSecondPart(url);
-    console.log(token)
+    $rootScope.token = getSecondPart(url);
+    window.alert("rediredt:"+ $rootScope.token);
     
     window.location.replace("https://igalram.github.io/linqin/#!/feed.html")
     return
