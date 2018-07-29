@@ -27,13 +27,13 @@ app.controller('feedCtrl', function ($scope, $http, $location, feedSrv) {
         var async = $q.defer();
         $http.get(request).then(function (response) {
             async.resolve(request);
-        }, function(error) {
+        }, function (error) {
             console.error(error);
             async.reject("Failed to get feed");
         })
 
         window.alert("the requeat is:" + request);
-        console.log($scope.content);
+        console.log("$scope.content: " + $scope.content);
         return async.promise;
     }
 
