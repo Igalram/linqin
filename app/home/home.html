@@ -8,10 +8,6 @@
 
 </div>
 
-<div class="container ml-auto text-center">
-    <a id="authenticatelink" href="https://api.instagram.com/oauth/authorize/?client_id=f4be7d884aff47a49265754517616a0c&redirect_uri=https://igalram.github.io/linqin/redirect.html&response_type=token">Authenticate with Instagram</a>
-</div>
-
 
 <div class="container">
     
@@ -21,45 +17,12 @@
     
     <div class="card bg-light">
     <article class="card-body mx-auto" style="max-width: 400px;">
-        <h4 class="card-title mt-3 text-center">Create Account</h4>
-        <p class="text-center">Get started with your free account</p>
+        <p class="text-center">Start (or modify) your gallery</p>
         <p>
-            <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
-            <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+            <a id="authenticatelink" href="https://api.instagram.com/oauth/authorize/?client_id=f4be7d884aff47a49265754517616a0c&redirect_uri=https://igalram.github.io/linqin/redirect.html&response_type=token" class="btn btn-block btn-facebook"> <i class="fab fa-instagram"></i>Login with Instagram</a>
         </p>
-        <p class="divider-text">
-            <span class="bg-light">OR</span>
-        </p>
-        <form>
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-             </div>
-            <input name="" class="form-control" placeholder="User name" ng-model="userName" type="text">
-        </div> <!-- form-group// -->
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-             </div>
-            <input name="" class="form-control" placeholder="Email address" ng-model="email" type="email">
-        </div> <!-- form-group// -->
-      
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-            </div>
-            <input class="form-control" placeholder="Create password" ng-model="password" type="password">
-        </div> <!-- form-group// -->
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-            </div>
-            <input class="form-control" placeholder="Repeat password" ng-model="verifyPassword" type="password">
-        </div> <!-- form-group// -->                                      
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
-        </div> <!-- form-group// -->      
-        <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
+           
+        <p class="text-center">Problem logging in? <a href="">Request support</a> </p>                                                                 
     </form>
     </article>
     </div> <!-- card.// -->
