@@ -1,6 +1,6 @@
 var app = angular.module("linquinApp", ["ngRoute"]); 
 
-
+//https://igalram.github.io/linqin/#!
 
 app.config(function($routeProvider) {
     $routeProvider
