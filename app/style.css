@@ -94,6 +94,7 @@ background-color:  #1c5380;
   .square-box .img-responsive {
     display: table-cell;
     position: absolute;
+    max-width: 100%;
     top: 0;
     left: 0;
     bottom: 0;
