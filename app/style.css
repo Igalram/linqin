@@ -78,6 +78,15 @@ background-color:  #1c5380;
     width: 100%;
 }
 
+.post-img {
+    object-fit: cover;
+}
+
+.card-post-img {
+    margin-bottom: -20px;
+    padding: 5px;
+}
+
 .userInfo img {
     width: 30%;
     height: auto;
