@@ -80,6 +80,7 @@ background-color:  #1c5380;
 
 .post-img {
     object-fit: cover;
+    max-width: 100%;
 }
 
 .userInfo img {
