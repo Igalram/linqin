@@ -1,25 +1,26 @@
-<div>
-    New Token: {{token}}
-    <h1> Your Instagram feed goes here!</h1>
-    {{6+7}}
-</div>
-<div class="userInfo">
-    <img class="userProfile" ng-src="{{instagramFeed.profile_picture}}" />
-    <div class="info">
-        <p> <img ng-src="{{profilePicture}}"/></p>
-        <p>{{userName}}</p>
-        <p>{{fullName}}</p>
+<div class="container">
+    <div>
+        New Token: {{token}}
+        <h1> Hi! Your Instagram feed goes here!</h1>
+        {{6+7}}
     </div>
-</div>
-<div class="row">
-    <div class="col-md-3" ng-repeat="post in posts">
-        <div class="card">
-            <img class="card-img-top" src="{{post.img}}">
-
+    <div class="userInfo">
+        <img class="userProfile" ng-src="{{instagramFeed.profile_picture}}" />
+        <div class="info">
+            <p>
+                <img ng-src="{{profilePicture}}" />
+            </p>
+            <p>{{userName}}</p>
+            <p>{{fullName}}</p>
         </div>
     </div>
-
-
+    <div class="row">
+        <div class="col-md-4" ng-repeat="post in posts">
+            <div class="card">
+                <img class="card-img-top" src="{{post.img}}">
+            </div>
+        </div>
+    </div>
 </div>
 <!-- <instagram-profile>
     content for ng-transclude -->
