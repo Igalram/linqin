@@ -16,7 +16,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     // }
 
 
-   // $scope.testfeedCtrl = "try try feed Ctrl"
+    // $scope.testfeedCtrl = "try try feed Ctrl"
     //console.log($scope.testfeedCtrl);
     var dbURL = "https://linqin.herokuapp.com/db";
 
@@ -62,41 +62,46 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     }
 
-    function getDB () {
-        
+    $scope.getDB = function() {
+
         $http.get(dbURL).then(
-            function(response) {
+            function (response) {
                 console.log("getDB is called");
                 console.log(response);
-        
 
 
-        } , function(err) {
-            console.log("err");
-        });
+
+            },
+            function (err) {
+                console.log("err");
+            });
 
     }
 
-
-$scope.posts = [];
-$http.get(request).then(function (response) {
-    response.data.data.forEach(function (plainObj) {
-        var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
-        $scope.posts.push(post);
-    })
-
-}, function (error) {
-    console.error(error);
-
-});
+    $scope.getDB();
 
 
-$scope.checkUserExists = function (userId) {
-console.log("userID from function: " + userId);
 
-};
 
-$scope.checkUserExists($scope.userId);
+    $scope.posts = [];
+    $http.get(request).then(function (response) {
+        response.data.data.forEach(function (plainObj) {
+            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+            $scope.posts.push(post);
+        })
+
+    }, function (error) {
+        console.error(error);
+
+    });
+
+
+    $scope.checkUserExists = function (userId) {
+        console.log("userID from function: " + userId);
+
+    };
+
+    $scope.checkUserExists($scope.userId);
 
 })
 
