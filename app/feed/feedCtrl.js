@@ -34,7 +34,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         $scope.profilePicture = userInfo.profile_picture;
         $scope.fullName = userInfo.fullName;
 
-        console.log("username" + userInfo.username + "userID" + $scope.userId);
+        console.log("username" + userInfo.username);
         
         $scope.content = response.data;
         console.log($scope.content);
@@ -44,6 +44,12 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     })
 
     console.log("user Info:" + $scope.userInfo);
+
+    $scope.userExists = false;
+    function checkUserExists($scope.userId) {
+        console.log("userID from function: " + $scope.userId);
+
+    }
 
     function Post(id, userId, img, date, likes, link, location) {
         this.id = id;
