@@ -3,7 +3,7 @@
 // //     //https://api.instagram.com/v1/users/self/?access_token=ACCESS-TOKEN
 
 
-// })
+// })   Linqin123!
 
 
 app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
@@ -61,6 +61,9 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     }
 
+    $http.get()
+
+    
     $scope.posts = [];
     $http.get(request).then(function (response) {
         response.data.data.forEach(function (plainObj) {
