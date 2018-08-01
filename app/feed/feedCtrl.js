@@ -36,7 +36,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         $scope.profilePicture = userInfo.profile_picture;
         $scope.fullName = userInfo.fullName;
 
-        function checkUserExists($scope.userId) {
+        $scope.checkUserExists($scope.userId) {
             console.log("userID from function: " + $scope.userId);
 
         }
