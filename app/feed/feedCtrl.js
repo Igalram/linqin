@@ -8,7 +8,7 @@
 
 app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
-    $scope.test = "testtest";
+    //$scope.test = "testtest";
     // $scope.getFeed = function (token) {
     //     window.alert("the new token is");
     //     $scope.token = localStorage.getItem("token");
@@ -16,8 +16,8 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     // }
 
 
-    $scope.testfeedCtrl = "try try feed Ctrl"
-    console.log($scope.testfeedCtrl);
+   // $scope.testfeedCtrl = "try try feed Ctrl"
+    //console.log($scope.testfeedCtrl);
     var dbURL = "https://linqin.herokuapp.com/db";
 
     $scope.content = [];
@@ -62,38 +62,40 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     }
 
-    /*
-    $http.get(dbURL).then (function (response) {
-        console.log("response")})
-
-    }, function (error) {
-        console.error(error);
-
-    });
+    function getDB () {
+        
+        $http.get(dbURL).then(
+            function(response) {
+                console.log(response);
+        
 
 
-        */
+        } , function(err) {
+            console.log("err");
+        });
 
-    
-    $scope.posts = [];
-    $http.get(request).then(function (response) {
-        response.data.data.forEach(function (plainObj) {
-            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
-            $scope.posts.push(post);
-        })
-
-    }, function (error) {
-        console.error(error);
-
-    });
+    }
 
 
-    $scope.checkUserExists = function(userId) {
-        console.log("userID from function: " + $scope.userId);
-    
-    };
-    
+$scope.posts = [];
+$http.get(request).then(function (response) {
+    response.data.data.forEach(function (plainObj) {
+        var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+        $scope.posts.push(post);
+    })
+
+}, function (error) {
+    console.error(error);
+
 });
+
+/*
+$scope.checkUserExists = function (userId) {
+console.log("userID from function: " + $scope.userId);
+
+};
+*/
+})
 
 
 
