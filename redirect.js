@@ -10,6 +10,6 @@ function handleToken(url) {
     //window.alert("rediredt:"+ token);
     localStorage.setItem("token", token);
 
-    window.location.replace("https://igalram.github.io/linqin/#!/feed.html")
+    window.location.replace("http://localhost:5500/#!/feed.html")
     return
 }

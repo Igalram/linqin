@@ -28,11 +28,13 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     $http.get(request).then(function (response) {
         //userInfo
         var userInfo = response.data.data[0].user;
+        console.log (userInfo);
         $scope.userName = userInfo.username;
+        $scope.userId = userInfo.id;
         $scope.profilePicture = userInfo.profile_picture;
         $scope.fullName = userInfo.fullName;
 
-        console.log("username" + userInfo.username);
+        console.log("username" + userInfo.username + "userID" + $scope.userId);
         
         $scope.content = response.data;
         console.log($scope.content);

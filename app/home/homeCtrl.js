@@ -1,7 +1,7 @@
 app.controller("homeCtrl", function ($scope, $q, $http) {
 $scope.testhomeCtrl = "try try home Ctrl";
 $scope.receivedToken='asdf';
-
+/*
 $scope.authenticate = function () {
     console.log("authenticate is called");
 
@@ -21,7 +21,7 @@ $scope.authenticate = function () {
 }
 
 return $scope.receivedToken;
-});
+});*/
 
 
 /*
