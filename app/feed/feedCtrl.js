@@ -77,12 +77,13 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     });
 
 
+    $scope.checkUserExists = function(userId) {
+        console.log("userID from function: " + $scope.userId);
+    
+    };
+    
 });
 
-$scope.checkUserExists = function(userId) {
-    console.log("userID from function: " + $scope.userId);
-
-};
 
 
 
