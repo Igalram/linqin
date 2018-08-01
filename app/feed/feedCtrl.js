@@ -18,6 +18,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     $scope.testfeedCtrl = "try try feed Ctrl"
     console.log($scope.testfeedCtrl);
+    var dbURL = "https://linqin.herokuapp.com/db";
 
     $scope.content = [];
     $scope.userInfo = {};
@@ -61,7 +62,17 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     }
 
-    $http.get()
+    /*
+    $http.get(dbURL).then (function (response) {
+        console.log("response")})
+
+    }, function (error) {
+        console.error(error);
+
+    });
+
+
+        */
 
     
     $scope.posts = [];
