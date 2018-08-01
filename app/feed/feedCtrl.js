@@ -66,6 +66,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         
         $http.get(dbURL).then(
             function(response) {
+                console.log("getDB is called");
                 console.log(response);
         
 
