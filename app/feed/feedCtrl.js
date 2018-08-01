@@ -89,12 +89,12 @@ $http.get(request).then(function (response) {
 
 });
 
-/*
+
 $scope.checkUserExists = function (userId) {
 console.log("userID from function: " + $scope.userId);
 
 };
-*/
+
 })
 
 
