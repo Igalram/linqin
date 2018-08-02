@@ -98,8 +98,9 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     });
 
-
+/*
     $scope.checkUserExists = function (userId) {
+        console.log (userId);
         console.log("$scope.DB=" + $scope.DB);
         console.log("userID from function: " + userId);
         console.log("users=" + $scope.DB.users);
@@ -113,7 +114,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     }
 
     $scope.checkUserExists($scope.userId);
-
+*/
 })
 
 
