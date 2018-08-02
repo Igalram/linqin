@@ -105,7 +105,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         console.log("users=" + DB.users);
         for (i = 0; i < DB.users.length; i++) {
             console.log("user=" + DB.users[i]);
-            console.log("userId=" DB.users[i].id);
+            console.log("userId=" + DB.users[i].id);
             if (userId === DB.users[i].id)
                 return true;
         }
