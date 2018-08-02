@@ -101,17 +101,15 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         console.log("userID from function: " + userId);
         console.log("users=" + $scope.DB.users);
         for (i = 0; i < $scope.DB.users.length; i++) {
-            console.log("user="+$scope.DB.users[i]);
-            console.log("userId="+$scope.DB.users[i].id);
+            console.log("user=" + $scope.DB.users[i]);
+            console.log("userId=" + $scope.DB.users[i].id);
             if (userId === $scope.DB.users[i].id)
                 return true;
         }
         return false;
     }
 
-};
-
-$scope.checkUserExists($scope.userId);
+    $scope.checkUserExists($scope.userId);
 
 })
 
