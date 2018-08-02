@@ -22,6 +22,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
                 console.log("getDB is called");
                 console.log(response);
                 DB=response;
+                console.log(DB);
                 $scope.checkUserExists($scope.userId);
 
                 
