@@ -79,8 +79,9 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     }
 
+    $scope.getDB();
     var DB = {};
-    DB = $scope.getDB();
+    DB = response;
     console.log("DB" + DB);
 
 
