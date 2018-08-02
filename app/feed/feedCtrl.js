@@ -22,7 +22,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     $scope.content = [];
     $scope.userInfo = {};
-    $scope.DB = {};
+    var DB = {};
     //window.alert("getting into getFeed function with q5");
 
     $scope.token = localStorage.getItem("token");
@@ -70,7 +70,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
             function (response) {
                 console.log("getDB is called");
                 console.log(response);
-                $scope.DB=response;
+                DB=response;
 
 
 
@@ -100,13 +100,13 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
 
     $scope.checkUserExists = function (userId) {
-        console.log("$scope.DB from check function=" + $scope.DB);
+        console.log("DB from check function= " + DB);
         console.log("userID from function: " + userId);
-        console.log("users=" + $scope.DB.users);
-        for (i = 0; i < $scope.DB.users.length; i++) {
-            console.log("user=" + $scope.DB.users[i]);
-            console.log("userId=" + $scope.DB.users[i].id);
-            if (userId === $scope.DB.users[i].id)
+        console.log("users=" + DB.users);
+        for (i = 0; i < DB.users.length; i++) {
+            console.log("user=" + DB.users[i]);
+            console.log("userId=" DB.users[i].id);
+            if (userId === DB.users[i].id)
                 return true;
         }
         return false;
