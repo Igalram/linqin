@@ -32,6 +32,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
         console.log(userInfo);
         $scope.userName = userInfo.username;
         $scope.userId = userInfo.id;
+        console.log($scope.userId);
         $scope.userExists = false;
 
         $scope.profilePicture = userInfo.profile_picture;
@@ -62,7 +63,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     }
 
-    $scope.getDB = function() {
+    $scope.getDB = function () {
 
         $http.get(dbURL).then(
             function (response) {
@@ -78,7 +79,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     }
 
-    $scope.getDB();
+    $scope.DB = $scope.getDB();
 
 
 
@@ -98,10 +99,19 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     $scope.checkUserExists = function (userId) {
         console.log("userID from function: " + userId);
+        console.log("users=" + $scope.DB.users);
+        for (i = 0; i < $scope.DB.users.length; i++) {
+            console.log("user="+$scope.DB.users[i]);
+            console.log("userId="+$scope.DB.users[i].id);
+            if (userId === $scope.DB.users[i].id)
+                return true;
+        }
+        return false;
+    }
 
-    };
+};
 
-    $scope.checkUserExists($scope.userId);
+$scope.checkUserExists($scope.userId);
 
 })
 
