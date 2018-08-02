@@ -1,6 +1,13 @@
-app.controller("homeCtrl", function ($scope, $q, $http) {
+app.controller("homeCtrl", function ($scope, $q, $http, $routeParams, $location, feedSrv) {
 $scope.testhomeCtrl = "try try home Ctrl";
 $scope.receivedToken='asdf';
+// console.log($routeParams);
+// console.log($location.$$url.substring(15));
+var token = $location.$$url.substring(15);
+if(token) {
+  feedSrv.token = token;
+  $location.path("/feed");
+}
 
 })
 /*

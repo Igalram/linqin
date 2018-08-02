@@ -1,4 +1,4 @@
-app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
+app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams, feedSrv) {
 
     var dbURL = "https://linqin.herokuapp.com/db";
 
@@ -7,7 +7,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     var DB = {};
 
 
-    $scope.token = localStorage.getItem("token");
+    $scope.token = feedSrv.token || localStorage.getItem("token");
 
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
 

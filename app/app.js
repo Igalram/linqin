@@ -8,11 +8,16 @@ app.config(function($routeProvider) {
       templateUrl: 'app/home/home.html',
       controller: 'homeCtrl'
     })
-
-    .when('/feed.html', {
+    .when('/feed', {
       templateUrl: 'app/feed/feed.html',
       controller: 'feedCtrl'
     })
+    .when('/:access_token', {
+      templateUrl: 'app/home/home.html',
+      controller: 'homeCtrl'
+    })
+
+
 /*
     .when('/access_token=:accessToken', {
       template: '',
