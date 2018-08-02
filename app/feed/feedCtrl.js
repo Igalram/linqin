@@ -1,32 +1,53 @@
-// angular.module("linquinApp").directive('instagramProfile', function () {
-
-// //     //https://api.instagram.com/v1/users/self/?access_token=ACCESS-TOKEN
-
-
-// })   Linqin123!
-
-
 app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
-    //$scope.test = "testtest";
-    // $scope.getFeed = function (token) {
-    //     window.alert("the new token is");
-    //     $scope.token = localStorage.getItem("token");
-    //     window.alert($scope.token);
-    // }
-
-
-    // $scope.testfeedCtrl = "try try feed Ctrl"
-    //console.log($scope.testfeedCtrl);
     var dbURL = "https://linqin.herokuapp.com/db";
 
     $scope.content = [];
     $scope.userInfo = {};
     var DB = {};
-    //window.alert("getting into getFeed function with q5");
+
 
     $scope.token = localStorage.getItem("token");
+
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
+
+
+    // var p1 = $http.get(request);
+    // var p2 = $http.get(dbURL);
+
+    $scope.getDB = function () {
+
+        $http.get(dbURL).then(
+            function (response) {
+                console.log("getDB is called");
+                console.log(response);
+                DB=response;
+                $scope.checkUserExists($scope.userId);
+
+                
+
+            },
+            function (err) {
+                console.log("err");
+            });
+
+    }
+
+    $scope.checkUserExists = function (userId) {
+        console.log("DB from check function= " + DB);
+        console.log("userID from function: " + userId);
+        console.log("users=" + DB.users);
+        for (i = 0; i < DB.users.length; i++) {
+            console.log("user=" + DB.users[i]);
+            console.log("userId=" + DB.users[i].id);
+            if (userId === DB.users[i].id)
+                return true;
+        }
+        return false;
+    }
+
+
+
     $http.get(request).then(function (response) {
         //userInfo
         var userInfo = response.data.data[0].user;
@@ -44,6 +65,9 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
         $scope.content = response.data;
         console.log($scope.content);
+        $scope.getDB();
+
+
 
     }, function (error) {
         console.error(error);
@@ -64,24 +88,8 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     }
 
-    $scope.getDB = function () {
-
-        $http.get(dbURL).then(
-            function (response) {
-                console.log("getDB is called");
-                console.log(response);
-                DB=response;
-
-
-
-            },
-            function (err) {
-                console.log("err");
-            });
-
-    }
-
-    $scope.getDB();
+   
+    console.log(DB);
     
     
 
@@ -99,20 +107,8 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     });
 
 
-    $scope.checkUserExists = function (userId) {
-        console.log("DB from check function= " + DB);
-        console.log("userID from function: " + userId);
-        console.log("users=" + DB.users);
-        for (i = 0; i < DB.users.length; i++) {
-            console.log("user=" + DB.users[i]);
-            console.log("userId=" + DB.users[i].id);
-            if (userId === DB.users[i].id)
-                return true;
-        }
-        return false;
-    }
+  
 
-    $scope.checkUserExists($scope.userId);
 
 })
 
