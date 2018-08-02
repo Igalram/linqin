@@ -22,6 +22,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     $scope.content = [];
     $scope.userInfo = {};
+    $scope.DB = {};
     //window.alert("getting into getFeed function with q5");
 
     $scope.token = localStorage.getItem("token");
@@ -69,6 +70,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
             function (response) {
                 console.log("getDB is called");
                 console.log(response);
+                $scope.DB=response;
 
 
 
@@ -80,10 +82,8 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     }
 
     $scope.getDB();
-    var DB = {};
-    DB = response;
-    console.log("DB" + DB);
-
+    
+    
 
 
     $scope.posts = [];
@@ -98,10 +98,9 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
 
     });
 
-/*
+
     $scope.checkUserExists = function (userId) {
-        console.log (userId);
-        console.log("$scope.DB=" + $scope.DB);
+        console.log("$scope.DB from check function=" + $scope.DB);
         console.log("userID from function: " + userId);
         console.log("users=" + $scope.DB.users);
         for (i = 0; i < $scope.DB.users.length; i++) {
@@ -114,7 +113,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     }
 
     $scope.checkUserExists($scope.userId);
-*/
+
 })
 
 
