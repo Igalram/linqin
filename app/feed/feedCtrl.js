@@ -80,7 +80,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     }
 
     var DB = $scope.getDB();
-    console.log("$scope.DB" + $scope.DB);
+    console.log("DB" + DB);
 
 
 
