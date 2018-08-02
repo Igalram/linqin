@@ -37,11 +37,11 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, feedSrv) {
     $scope.checkUserExists = function (userId) {
         console.log("DB from check function= " + DB);
         console.log("userID from function: " + userId);
-        console.log("users=" + DB.data.data.users);
-        for (i = 0; i < DB.data.data.users.length; i++) {
-            console.log("user=" + DB.data.data.users[i]);
-            console.log("userId=" + DB.data.data.users[i].id);
-            if (userId === DB.data.data.users[i].id)
+        console.log("users=" + DB.data.users);
+        for (i = 0; i < DB.data.users.length; i++) {
+            console.log("user=" + DB.data.users[i]);
+            console.log("userId=" + DB.data.users[i].id);
+            if (userId === DB.data.users[i].id)
                 return true;
         }
         return false;
