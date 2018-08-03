@@ -12,13 +12,17 @@
         <p>{{fullName}}</p>
     </div>
     <hr>
-    <div class="row">
+    <div class="row wrapper">
         <div class="col-md-4" ng-repeat="post in posts">
             <div class="square-box">
                 <a href="#">
                     <img ng-src="{{post.img}}" class="img-responsive">
                 </a>
                 <!-- <img class="post-img" ng-src="{{post.img}}"> -->
+            </div>
+            <div>
+                <input type="text" class="linqin" placeholder="Your link goes here" />
+                <button type="button" class="btn-set">Set!</button>
             </div>
         </div>
     </div>
