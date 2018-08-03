@@ -4,12 +4,10 @@ app.factory('feedSrv', function ($http, $log, $q) {
     var token;
 
     console.log(testSrv);
+    console.log("token from feedSrv=" + token);
 
     return {
         token: token
     }
-
-
-
 });
 

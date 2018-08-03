@@ -8,6 +8,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
 
 
     $scope.token = feedSrv.token || localStorage.getItem("token");
+    console.log("$scope.token in feedCtrl.js="+$scope.token);
 
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
 
@@ -21,12 +22,9 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
             function (response) {
                 console.log("getDB is called");
                 console.log(response);
-                DB=response;
+                DB = response;
                 console.log(DB);
                 $scope.checkUserExists($scope.userId);
-
-                
-
             },
             function (err) {
                 console.log("err");
@@ -41,10 +39,11 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
         for (i = 0; i < DB.data.users.length; i++) {
             console.log("user=" + DB.data.users[i]);
             console.log("userId=" + DB.data.users[i].data[0].user.id);
-            if (userId === DB.data.users[i].id){
+            if (userId === DB.data.users[i].data[0].user.id) {
                 console.log("true");
-                return true;}
-            
+                return true;
+            }
+
         }
         console.log("false");
         return false;
@@ -71,8 +70,6 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
         console.log($scope.content);
         $scope.getDB();
 
-
-
     }, function (error) {
         console.error(error);
     })
@@ -92,10 +89,10 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
 
     }
 
-   
-    console.log(DB);
-    
-    
+
+    //console.log(DB);
+
+
 
 
     $scope.posts = [];
@@ -111,7 +108,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
     });
 
 
-  
+
 
 
 })
