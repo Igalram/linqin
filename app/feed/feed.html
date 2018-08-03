@@ -21,8 +21,11 @@
                 <!-- <img class="post-img" ng-src="{{post.img}}"> -->
             </div>
             <div>
-                <input type="text" class="linqin" placeholder="Your link goes here" />
-                <button type="button" class="btn-set">Set!</button>
+                <form>
+                    <input type="text" class="linqin" ng-model="theLinq" placeholder="Your link goes here" />
+                    <button type="button" class="btn-set" ng-click="addLinq(theLinq)">Set!</button>
+                    <p>the linq is: {{theLinq}}</p>
+                </form>
             </div>
         </div>
     </div>

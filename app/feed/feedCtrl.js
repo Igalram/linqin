@@ -1,3 +1,6 @@
+// app.controller('linqCtrl', function($scope) {
+
+// })
 app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams, feedSrv) {
 
     var dbURL = "https://linqin.herokuapp.com/db";
@@ -6,6 +9,9 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
     $scope.userInfo = {};
     var DB = {};
 
+    $scope.addLinq = function(linq) {
+        $scope.linq = linq;
+    }
 
     $scope.token = feedSrv.token || localStorage.getItem("token");
     console.log("$scope.token in feedCtrl.js="+$scope.token);
@@ -31,6 +37,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
             });
 
     }
+
 
     $scope.checkUserExists = function (userId) {
         console.log("DB from check function= " + JSON.stringify(DB));
