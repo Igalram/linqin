@@ -9,9 +9,16 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
     $scope.userInfo = {};
     $scope.currentFeed = [];
     var DB = {};
-    
-    $scope.addLinq = function (linq) {
+
+    $scope.addLinq = function (linq, $index) {
         $scope.linq = linq;
+        console.log("linq=" + linq);
+        console.log("$index=" + $index);
+        $http({
+            url: dbURL,
+            method: 'PATCH',
+            data: { "op": "replace", "path": "/db/users[$scope.userIndex]/data[$index]/link", "value": linq }
+        })
     }
 
     $scope.token = feedSrv.token || localStorage.getItem("token");
