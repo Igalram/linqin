@@ -7,16 +7,18 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
 
     $scope.content = [];
     $scope.userInfo = {};
+    $scope.currentFeed = [];
     var DB = {};
-
-    $scope.addLinq = function(linq) {
+    
+    $scope.addLinq = function (linq) {
         $scope.linq = linq;
     }
 
     $scope.token = feedSrv.token || localStorage.getItem("token");
-    console.log("$scope.token in feedCtrl.js="+$scope.token);
+    console.log("$scope.token in feedCtrl.js=" + $scope.token);
 
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
+
 
 
     // var p1 = $http.get(request);
@@ -30,16 +32,24 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
                 console.log(response);
                 DB = response;
                 console.log(DB);
+                console.log("DB.data=" + DB.data);
+                console.log("response.data=" + response.data);
                 $scope.checkUserExists($scope.userId);
+
+                DB.data.users[$scope.userIndex].data.forEach(function (plainObj) {
+                    var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+                    $scope.currentFeed.push(post);
+                })
+                console.log("$scope.currentFeed=" + $scope.currentFeed);
             },
             function (err) {
                 console.log("err");
             });
-
     }
 
 
     $scope.checkUserExists = function (userId) {
+        $scope.userIndex = -1;
         console.log("DB from check function= " + JSON.stringify(DB));
         console.log("userID from function: " + userId);
         console.log("users=" + DB.data.users);
@@ -48,7 +58,8 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
             console.log("userId=" + DB.data.users[i].data[0].user.id);
             if (userId === DB.data.users[i].data[0].user.id) {
                 console.log("true");
-                return true;
+                $scope.userIndex = i;
+                return $scope.userIndex;
             }
 
         }
@@ -69,6 +80,14 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
 
         $scope.profilePicture = userInfo.profile_picture;
         $scope.fullName = userInfo.fullName;
+
+        //save current feed
+        // console.log("DB.data=" + DB.data);
+        // console.log("response.data=" + response.data);
+        // response.data.data.forEach(function (plainObj) {
+        //     var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+        //     $scope.currentFeed.push(post);
+        // })
 
 
         console.log("username" + userInfo.username);
@@ -97,11 +116,6 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
     }
 
 
-    //console.log(DB);
-
-
-
-
     $scope.posts = [];
     $http.get(request).then(function (response) {
         response.data.data.forEach(function (plainObj) {
@@ -113,11 +127,6 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
         console.error(error);
 
     });
-
-
-
-
-
 })
 
 
