@@ -21,12 +21,13 @@ app.factory('feedSrv', function ($http, $log, $q) {
             function (response) {
                 console.log("getDB is called");
                 console.log(response);
-                currentFeed.splice(0, currentFeed.length);
                 DB = response;
                 console.log(DB);
                 console.log("DB.data=" + DB.data);
                 console.log("response.data=" + response.data);
                 checkUserExists(userId);
+                currentFeed.splice(0, currentFeed.length);
+
 
 
                 DB.data.users[userIndex].data.forEach(function (plainObj) {
@@ -103,8 +104,8 @@ app.factory('feedSrv', function ($http, $log, $q) {
         console.log("users=" + DB.data.users);
         for (i = 0; i < DB.data.users.length; i++) {
             console.log("user=" + DB.data.users[i]);
-            console.log("userId=" + DB.data.users[i].data[0].user.id);
-            if (userId === DB.data.users[i].data[0].user.id) {
+            console.log("userId=" + DB.data.users[i].id);
+            if (userId === DB.data.users[i].id) {
                 console.log("true");
                 userIndex = i;
                 return userIndex;
