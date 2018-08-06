@@ -1,6 +1,4 @@
-// app.controller('linqCtrl', function($scope) {
 
-// })
 app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams, feedSrv) {
 
     var dbURL = "https://linqin.herokuapp.com/db";
