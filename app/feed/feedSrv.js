@@ -27,6 +27,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
                 console.log("response.data=" + response.data);
                 checkUserExists(userId);
 
+                
                 DB.data.users[userIndex].data.forEach(function (plainObj) {
                     var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
                     currentFeed.push(post);
