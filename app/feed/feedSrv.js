@@ -6,6 +6,113 @@ app.factory('feedSrv', function ($http, $log, $q) {
     console.log(testSrv);
     console.log("token from feedSrv=" + token);
 
+    var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + "4045882209.f4be7d8.37249150849848b08a2376e3d5239a1f";
+    var dbURL = "https://linqin.herokuapp.com/db";
+    var DB = {};
+    var currentFeed = [];
+
+
+
+
+    getDB = function () {
+
+        $http.get(dbURL).then(
+            function (response) {
+                console.log("getDB is called");
+                console.log(response);
+                DB = response;
+                console.log(DB);
+                console.log("DB.data=" + DB.data);
+                console.log("response.data=" + response.data);
+                checkUserExists(userId);
+
+                DB.data.users[userIndex].data.forEach(function (plainObj) {
+                    var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+                    currentFeed.push(post);
+                })
+                console.log("srv.currentFeed=" + currentFeed);
+            },
+            function (err) {
+                console.log("err");
+            });
+    }
+
+
+    
+    $http.get(request).then(function (response) {
+        //userInfo
+        var userInfo = response.data.data[0].user;
+        console.log(userInfo);
+        userName = userInfo.username;
+        userId = userInfo.id;
+        console.log(userId);
+        userExists = false;
+
+        profilePicture = userInfo.profile_picture;
+        fullName = userInfo.fullName;
+
+        console.log("username" + userInfo.username);
+
+        content = response.data;
+        console.log(content);
+        getDB();
+
+    }, function (error) {
+        console.error(error);
+    })
+
+    
+
+    function Post(id, userId, img, date, likes, link, location) {
+        this.id = id;
+        this.userId = userId;
+        this.img = img;
+        this.date = date;
+        this.likes = likes;
+        this.link = link;
+        this.location = location;
+
+    }
+
+
+    posts = [];
+    $http.get(request).then(function (response) {
+        response.data.data.forEach(function (plainObj) {
+            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+            posts.push(post);
+        })
+
+    }, function (error) {
+        console.error(error);
+
+    });
+
+
+
+    checkUserExists = function (userId) {
+        userIndex = -1;
+        //console.log("DB from check function= " + JSON.stringify(DB));
+        console.log("userID from function: " + userId);
+        console.log("users=" + DB.data.users);
+        for (i = 0; i < DB.data.users.length; i++) {
+            console.log("user=" + DB.data.users[i]);
+            console.log("userId=" + DB.data.users[i].data[0].user.id);
+            if (userId === DB.data.users[i].data[0].user.id) {
+                console.log("true");
+                userIndex = i;
+                return userIndex;
+            }
+
+        }
+        console.log("false");
+        return false;
+    }
+
+
+
+
+//new functions for updating DB after IG get and compare
+
     function getOffset(IgObject, ourDB, userIndex) {
         for (i=IgObject.data.data.length; i=0; i--) {
 
@@ -40,7 +147,10 @@ app.factory('feedSrv', function ($http, $log, $q) {
     return {
         token: token,
         updateDB : updateDB,
-        getOffset : getOffset
+        getOffset : getOffset,
+        getDB : getDB,
+        currentFeed : currentFeed
     }
+
 });
 
