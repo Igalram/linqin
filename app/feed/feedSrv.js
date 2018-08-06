@@ -136,7 +136,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
             for (j = ourDB.data.users[userIndex].data.length; j > 0; j--) {
 
-                if (IgObject.data.id == ourDB.data.users[userIndex].data.id) {
+                if (IgObject.data[i-1].id == ourDB.data.users[userIndex].data[j-1].id) {
                     offSet = (j - i);
                     return offSet;
                 }
@@ -156,8 +156,6 @@ app.factory('feedSrv', function ($http, $log, $q) {
             newDB = newIgObject.concat(ourDB);
             http.patch(path, newDB);
         }
-
-
     }
 
 
