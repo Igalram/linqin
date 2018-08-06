@@ -110,6 +110,21 @@ app.factory('feedSrv', function ($http, $log, $q) {
     }
 
 
+//get linq
+
+function addLinq(linq, $index) {
+        console.log("linq=" + linq);
+        console.log("$index=" + $index);
+        var path = "https://linqin.herokuapp.com/users/" + userId; //userId
+        //var data = getUserDataTemp();
+        var data = DB.data.users[userIndex];
+        data['data'][$index]['link'] = linq;
+
+        $http.patch(path, data);
+        getDB();
+
+
+    }
 
 
 //new functions for updating DB after IG get and compare
@@ -150,7 +165,8 @@ app.factory('feedSrv', function ($http, $log, $q) {
         updateDB : updateDB,
         getOffset : getOffset,
         getDB : getDB,
-        currentFeed : currentFeed
+        currentFeed : currentFeed,
+        addLinq : addLinq
     }
 
 });
