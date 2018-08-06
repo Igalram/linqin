@@ -26,8 +26,6 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
 
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
 
-
-
     // var p1 = $http.get(request);
     // var p2 = $http.get(dbURL);
 
