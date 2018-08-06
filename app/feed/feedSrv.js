@@ -1,15 +1,16 @@
 app.factory('feedSrv', function ($http, $log, $q) {
 
     var testSrv = "do you see feedSrv service???";
-    var token;
+    token =  localStorage.getItem("token");
 
     console.log(testSrv);
     console.log("token from feedSrv=" + token);
 
-    var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + "4045882209.f4be7d8.37249150849848b08a2376e3d5239a1f";
+    var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + token;
     var dbURL = "https://linqin.herokuapp.com/db";
     var DB = {};
     var currentFeed = [];
+    
 
 
 
