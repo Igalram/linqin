@@ -21,13 +21,14 @@ app.factory('feedSrv', function ($http, $log, $q) {
             function (response) {
                 console.log("getDB is called");
                 console.log(response);
+                currentFeed.splice(0, currentFeed.length);
                 DB = response;
                 console.log(DB);
                 console.log("DB.data=" + DB.data);
                 console.log("response.data=" + response.data);
                 checkUserExists(userId);
 
-                
+
                 DB.data.users[userIndex].data.forEach(function (plainObj) {
                     var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
                     currentFeed.push(post);
@@ -123,10 +124,11 @@ app.factory('feedSrv', function ($http, $log, $q) {
         var data = DB.data.users[userIndex];
         data['data'][$index]['link'] = linq;
 
-        $http.patch(path, data);
-        getDB();
+        $http.patch(path, data).then(function (response) {
+            getDB();
+        }, function (error) { console.error(error); }
 
-
+        )
     }
 
 
@@ -137,7 +139,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
             for (j = ourDB.data.users[userIndex].data.length; j > 0; j--) {
 
-                if (IgObject.data[i-1].id == ourDB.data.users[userIndex].data[j-1].id) {
+                if (IgObject.data[i - 1].id == ourDB.data.users[userIndex].data[j - 1].id) {
                     offSet = (j - i);
                     return offSet;
                 }
