@@ -135,12 +135,12 @@ app.factory('feedSrv', function ($http, $log, $q) {
     //new functions for updating DB after IG get and compare
 
     function getOffset(IgObject, ourDB, userIndex) {
-        for (i = IgObject.data.length; i > 0; i--) {
+        for (i = IgObject.data.length-1; i > 0; i--) {
 
-            for (j = ourDB.data.users[userIndex].data.length; j > 0; j--) {
+            for (j = ourDB.data.users[userIndex].data.length-1; j > 0; j--) {
 
-                if (IgObject.data[i - 1].id == ourDB.data.users[userIndex].data[j - 1].id) {
-                    offSet = (j - i);
+                if (IgObject.data[i].id == ourDB.data.users[userIndex].data[j].id) {
+                    offSet = (i - j);
                     return offSet;
                 }
 
@@ -153,11 +153,13 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
 
     updateDB = function (igObject, ourDB, userIndex) {
+        var path = "https://linqin.herokuapp.com/users/" + userId; //userId
         var offset = getOffset(igObject, ourDB, userIndex);
         if (offSet > 0) {
-            newIgObject = igObject.slice(0, offSet);
-            newDB = newIgObject.concat(ourDB);
-            http.patch(path, newDB);
+            newIgObject = igObject.data.slice(0, offSet);
+            var newDB = newIgObject.concat(ourDB.data.users[userIndex].data);
+            ourDB.data.users[userIndex].data = newDB;
+            $http.patch(path, ourDB);
         }
     }
 
