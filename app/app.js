@@ -1,4 +1,5 @@
 //https://igalram.github.io/linqin/#!
+//https://api.instagram.com/v1/users/self/media/recent/?access_token=4045882209.f4be7d8.37249150849848b08a2376e3d5239a1f
 
 var app = angular.module("linquinApp", ["ngRoute"]); 
 

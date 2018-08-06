@@ -1,6 +1,4 @@
-// app.controller('linqCtrl', function($scope) {
 
-// })
 app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams, feedSrv) {
 
     var dbURL = "https://linqin.herokuapp.com/db";
@@ -27,8 +25,6 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
     console.log("$scope.token in feedCtrl.js=" + $scope.token);
 
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + $scope.token;
-
-
 
     // var p1 = $http.get(request);
     // var p2 = $http.get(dbURL);
@@ -89,15 +85,6 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
 
         $scope.profilePicture = userInfo.profile_picture;
         $scope.fullName = userInfo.fullName;
-
-        //save current feed
-        // console.log("DB.data=" + DB.data);
-        // console.log("response.data=" + response.data);
-        // response.data.data.forEach(function (plainObj) {
-        //     var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
-        //     $scope.currentFeed.push(post);
-        // })
-
 
         console.log("username" + userInfo.username);
 
