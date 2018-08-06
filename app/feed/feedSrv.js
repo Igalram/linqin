@@ -36,6 +36,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
             function (err) {
                 console.log("err");
             });
+        return currentFeed;
     }
 
 
