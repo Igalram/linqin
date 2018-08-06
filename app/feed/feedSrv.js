@@ -1,7 +1,7 @@
 app.factory('feedSrv', function ($http, $log, $q) {
 
     var testSrv = "do you see feedSrv service???";
-    token =  localStorage.getItem("token");
+    token = localStorage.getItem("token");
 
     console.log(testSrv);
     console.log("token from feedSrv=" + token);
@@ -10,7 +10,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
     var dbURL = "https://linqin.herokuapp.com/db";
     var DB = {};
     var currentFeed = [];
-    
+
 
 
 
@@ -32,15 +32,17 @@ app.factory('feedSrv', function ($http, $log, $q) {
                     currentFeed.push(post);
                 })
                 console.log("srv.currentFeed=" + currentFeed);
+                updateDB(igObject, DB, userIndex);
             },
             function (err) {
                 console.log("err");
             });
+
         return currentFeed;
     }
 
 
-    
+
     $http.get(request).then(function (response) {
         //userInfo
         var userInfo = response.data.data[0].user;
@@ -56,6 +58,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
         console.log("username" + userInfo.username);
 
         content = response.data;
+        igObject = content;
         console.log(content);
         getDB();
 
@@ -63,7 +66,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
         console.error(error);
     })
 
-    
+
 
     function Post(id, userId, img, date, likes, link, location) {
         this.id = id;
@@ -111,13 +114,11 @@ app.factory('feedSrv', function ($http, $log, $q) {
     }
 
 
-//get linq
-
-function addLinq(linq, $index) {
+    //get linq
+    function addLinq(linq, $index) {
         console.log("linq=" + linq);
         console.log("$index=" + $index);
         var path = "https://linqin.herokuapp.com/users/" + userId; //userId
-        //var data = getUserDataTemp();
         var data = DB.data.users[userIndex];
         data['data'][$index]['link'] = linq;
 
@@ -128,17 +129,16 @@ function addLinq(linq, $index) {
     }
 
 
-//new functions for updating DB after IG get and compare
+    //new functions for updating DB after IG get and compare
 
     function getOffset(IgObject, ourDB, userIndex) {
-        for (i=IgObject.data.data.length; i=0; i--) {
+        for (i = IgObject.data.length; i > 0; i--) {
 
-            for (j=ourDB.data.users[userIndex].data.length; j=0; j--) {
+            for (j = ourDB.data.users[userIndex].data.length; j > 0; j--) {
 
-                if (IgObject.data.data.id==ourDB.data.users[userIndex].data.id) {
-                    offSet=(j-i);
+                if (IgObject.data.id == ourDB.data.users[userIndex].data.id) {
+                    offSet = (j - i);
                     return offSet;
-
                 }
 
             }
@@ -146,16 +146,16 @@ function addLinq(linq, $index) {
 
 
         }
-
-
     }
 
 
-    function updateDB (IgObject, ourDB, offSet) {
-        
-        newIgObject = IgObject.slice(0,offSet);
-        newDB = newIgObject.concat(ourDB);
-        http.patch (path, newDB);
+    updateDB = function (igObject, ourDB, userIndex) {
+        var offset = getOffset(igObject, ourDB, userIndex);
+        if (offSet > 0) {
+            newIgObject = igObject.slice(0, offSet);
+            newDB = newIgObject.concat(ourDB);
+            http.patch(path, newDB);
+        }
 
 
     }
@@ -163,11 +163,11 @@ function addLinq(linq, $index) {
 
     return {
         token: token,
-        updateDB : updateDB,
-        getOffset : getOffset,
-        getDB : getDB,
-        currentFeed : currentFeed,
-        addLinq : addLinq
+        updateDB: updateDB,
+        //        getOffset: getOffset,
+        getDB: getDB,
+        currentFeed: currentFeed,
+        addLinq: addLinq
     }
 
 });
