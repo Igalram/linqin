@@ -160,7 +160,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
             newIgObject = igObject.data.slice(0, offSet);
             var newDB = newIgObject.concat(ourDB.data.users[userIndex].data);
             ourDB.data.users[userIndex].data = newDB;
-            $http.patch(path, ourDB);
+            $http.patch(path, ourDB.data.users[userIndex]);
         }
     }
 
