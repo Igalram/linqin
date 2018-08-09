@@ -35,7 +35,12 @@ app.factory('feedSrv', function ($http, $log, $q) {
                     currentFeed.push(post);
                 })
                 console.log("srv.currentFeed=" + currentFeed);
-                updateDB(igObject, DB, userIndex);
+                updateDB(igObject, DB, userIndex).then(function (response) {
+                    return;
+                }, function (error) {
+                    console.error(error);
+                });
+
             },
             function (err) {
                 console.log("err");
@@ -136,9 +141,9 @@ app.factory('feedSrv', function ($http, $log, $q) {
     //new functions for updating DB after IG get and compare
 
     function getOffset(IgObject, ourDB, userIndex) {
-        for (i = IgObject.data.length-1; i > 0; i--) {
+        for (i = IgObject.data.length - 1; i > 0; i--) {
 
-            for (j = ourDB.data.users[userIndex].data.length-1; j > 0; j--) {
+            for (j = ourDB.data.users[userIndex].data.length - 1; j > 0; j--) {
 
                 if (IgObject.data[i].id == ourDB.data.users[userIndex].data[j].id) {
                     offSet = (i - j);
@@ -154,14 +159,30 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
 
     updateDB = function (igObject, ourDB, userIndex) {
+        var async = $q.defer();
         var path = "https://linqin.herokuapp.com/users/" + userId; //userId
         var offset = getOffset(igObject, ourDB, userIndex);
         if (offSet > 0) {
             newIgObject = igObject.data.slice(0, offSet);
             var newDB = newIgObject.concat(ourDB.data.users[userIndex].data);
             ourDB.data.users[userIndex].data = newDB;
-            $http.patch(path, ourDB.data.users[userIndex]);
+            $http.patch(path, ourDB.data.users[userIndex]).then(function (response) {
+                console.log("Hi! sync");
+                async.resolve(currentFeed);
+            },
+                function (error) {
+                    console.error(error);
+                    async.reject("faild to patch");
+                })
         }
+
+        currentFeed.splice(0, currentFeed.length);
+        DB.data.users[userIndex].data.forEach(function (plainObj) {
+            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+            currentFeed.push(post);
+        })
+        return async.promise;
+
     }
 
 
