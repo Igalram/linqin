@@ -17,6 +17,7 @@ app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams,
     console.log("$scope.token in feedCtrl.js=" + $scope.token);
 
     $scope.currentFeed = feedSrv.currentFeed; 
+    
 
    
 

@@ -18,6 +18,13 @@ app.config(function($routeProvider) {
       controller: 'homeCtrl'
     })
 
+    .when('/v/:name', {
+      templateUrl: 'app/viewer/viewer.html',
+      controller: 'viewerCtrl'
+    })
+
+
+
 
 /*
     .when('/access_token=:accessToken', {

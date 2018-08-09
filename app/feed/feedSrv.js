@@ -10,7 +10,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
     var dbURL = "https://linqin.herokuapp.com/db";
     var DB = {};
     var currentFeed = [];
-
+    var userFeed = [];
 
 
 
@@ -50,30 +50,30 @@ app.factory('feedSrv', function ($http, $log, $q) {
     }
 
 
+    if (token) {
+        $http.get(request).then(function (response) {
+            //userInfo
+            var userInfo = response.data.data[0].user;
+            console.log(userInfo);
+            userName = userInfo.username;
+            userId = userInfo.id;
+            console.log(userId);
+            userExists = false;
 
-    $http.get(request).then(function (response) {
-        //userInfo
-        var userInfo = response.data.data[0].user;
-        console.log(userInfo);
-        userName = userInfo.username;
-        userId = userInfo.id;
-        console.log(userId);
-        userExists = false;
+            profilePicture = userInfo.profile_picture;
+            fullName = userInfo.fullName;
 
-        profilePicture = userInfo.profile_picture;
-        fullName = userInfo.fullName;
+            console.log("username" + userInfo.username);
 
-        console.log("username" + userInfo.username);
+            content = response.data;
+            igObject = content;
+            console.log(content);
+            getDB();
 
-        content = response.data;
-        igObject = content;
-        console.log(content);
-        getDB();
-
-    }, function (error) {
-        console.error(error);
-    })
-
+        }, function (error) {
+            console.error(error);
+        })
+    }
 
 
     function Post(id, userId, img, date, likes, link, location) {
@@ -87,19 +87,20 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     }
 
+    if (token) {
 
-    posts = [];
-    $http.get(request).then(function (response) {
-        response.data.data.forEach(function (plainObj) {
-            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
-            posts.push(post);
-        })
+        posts = [];
+        $http.get(request).then(function (response) {
+            response.data.data.forEach(function (plainObj) {
+                var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+                posts.push(post);
+            })
 
-    }, function (error) {
-        console.error(error);
+        }, function (error) {
+            console.error(error);
 
-    });
-
+        });
+    }
 
 
     checkUserExists = function (userId) {
@@ -185,6 +186,43 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     }
 
+    function VPost(image, link) {
+        this.image = image;
+        this.link = link;
+    }
+
+
+
+    getDbByName = function (username) {
+
+        userFeed.splice(0, userFeed.length);
+        
+        $http.get(dbURL).then(
+            function (response) {
+                var viewerDB = response;
+
+                for (i = 0; i < viewerDB.data.users.length; i++) {
+                    if (username === viewerDB.data.users[i].data[0].user.username) {
+                        viewerDB.data.users[i].data.forEach(function (obj) {
+                            var vPost = new VPost(obj.images.standard_resolution.url, obj.link);
+                            userFeed.push(vPost);
+                        })
+                    }
+                }
+
+
+
+            },
+            function (err) {
+                console.log("err");
+            });
+
+    }
+
+
+
+
+
 
     return {
         token: token,
@@ -192,8 +230,13 @@ app.factory('feedSrv', function ($http, $log, $q) {
         //        getOffset: getOffset,
         getDB: getDB,
         currentFeed: currentFeed,
+        userFeed : userFeed,
         addLinq: addLinq
     }
+
+
+
+
 
 });
 

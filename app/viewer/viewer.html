@@ -1,0 +1,22 @@
+<div class="container">
+
+    <h1>hello viewer!!!!</h1>
+    <!-- <div class="userInfo">
+        <p>
+            <img ng-src="{{profilePicture}}" />
+        </p>
+        <p>{{userName}}</p>
+        <p>{{fullName}}</p>
+    </div> -->
+    <hr>
+    <div class="row wrapper">
+        <div class="col-md-4" ng-repeat="post in userFeed">
+            <div class="square-box">
+                <a href="{{post.link}}" target="_blank">
+                    <img ng-src="{{post.image}}" class="img-responsive">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
