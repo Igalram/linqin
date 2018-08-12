@@ -1,10 +1,8 @@
 app.factory('feedSrv', function ($http, $log, $q) {
 
-    var testSrv = "do you see feedSrv service???";
     token = localStorage.getItem("token");
 
-    console.log(testSrv);
-    console.log("token from feedSrv=" + token);
+  
 
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + token;
     var dbURL = "https://linqin.herokuapp.com/db";
@@ -19,16 +17,11 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
         $http.get(dbURL).then(
             function (response) {
-                console.log("getDB is called");
-                console.log(response);
+               
                 DB = response;
-                console.log(DB);
-                console.log("DB.data=" + DB.data);
-                console.log("response.data=" + response.data);
+              
                 checkUserExists(userId);
                 currentFeed.splice(0, currentFeed.length);
-
-
 
                 DB.data.users[userIndex].data.forEach(function (plainObj) {
                     var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
@@ -52,22 +45,20 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     if (token) {
         $http.get(request).then(function (response) {
+           
             //userInfo
             var userInfo = response.data.data[0].user;
-            console.log(userInfo);
             userName = userInfo.username;
             userId = userInfo.id;
-            console.log(userId);
             userExists = false;
 
             profilePicture = userInfo.profile_picture;
             fullName = userInfo.fullName;
 
-            console.log("username" + userInfo.username);
 
             content = response.data;
             igObject = content;
-            console.log(content);
+
             getDB();
 
         }, function (error) {
@@ -105,14 +96,8 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     checkUserExists = function (userId) {
         userIndex = -1;
-        //console.log("DB from check function= " + JSON.stringify(DB));
-        console.log("userID from function: " + userId);
-        console.log("users=" + DB.data.users);
         for (i = 0; i < DB.data.users.length; i++) {
-            console.log("user=" + DB.data.users[i]);
-            console.log("userId=" + DB.data.users[i].id);
             if (userId === DB.data.users[i].id) {
-                console.log("true");
                 userIndex = i;
                 return userIndex;
             }
@@ -125,8 +110,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     //get linq
     function addLinq(linq, $index) {
-        console.log("linq=" + linq);
-        console.log("$index=" + $index);
+      
         var path = "https://linqin.herokuapp.com/users/" + userId; //userId
         var data = DB.data.users[userIndex];
         data['data'][$index]['link'] = linq;
