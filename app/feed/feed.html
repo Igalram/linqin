@@ -16,7 +16,7 @@
         <div class="col-md-4" ng-repeat="post in currentFeed">
             <div class="square-box">
                 <a href="#">
-                    <img ng-src="{{post.img}}" class="img-responsive">
+                    <img ng-src="{{post.img}}" class="img-responsive" ng-class="{grayscale: post.link == ''}">
                 </a>
                 <!-- <img class="post-img" ng-src="{{post.img}}"> -->
             </div>

@@ -188,3 +188,11 @@ background-color:  #1c5380;
     background-color: #42AEEC;
     color: #fff;
 }
+
+.grayscale {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: none;
+    filter: grayscale(100%);
+}
+
