@@ -149,6 +149,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
         var offset = getOffset(igObject, ourDB, userIndex);
         if (offSet > 0) {
             newIgObject = igObject.data.slice(0, offSet);
+            nullifyIgLink(newIgObject);
             var newDB = newIgObject.concat(ourDB.data.users[userIndex].data);
             ourDB.data.users[userIndex].data = newDB;
             $http.patch(path, ourDB.data.users[userIndex]).then(function (response) {
@@ -200,6 +201,14 @@ app.factory('feedSrv', function ($http, $log, $q) {
             function (err) {
                 console.log("err");
             });
+
+    }
+
+    nullifyIgLink = function (newIgObject) {
+        for (i=0; i<newIgObject.data.length; i++) {
+            newIgObject.data.users[userIndex].data.link=null;
+        }
+
 
     }
 
