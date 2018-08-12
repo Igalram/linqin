@@ -10,6 +10,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
     var currentFeed = [];
     var userFeed = [];
     var profilePicture = 'test';
+    var doesExist = false;
 
 
 
@@ -21,6 +22,8 @@ app.factory('feedSrv', function ($http, $log, $q) {
                 DB = response;
               
                 checkUserExists(userId);
+                if (doesExist==true){populateNewUser(igObject, DB);}
+
                 currentFeed.splice(0, currentFeed.length);
 
                 DB.data.users[userIndex].data.forEach(function (plainObj) {
@@ -99,10 +102,15 @@ app.factory('feedSrv', function ($http, $log, $q) {
         for (i = 0; i < DB.data.users.length; i++) {
             if (userId === DB.data.users[i].id) {
                 userIndex = i;
+                doesExist= true;
                 return userIndex;
             }
 
         }
+
+        userIndex = i+1;
+        return userIndex;
+
         console.log("false");
         return false;
     }
@@ -142,6 +150,36 @@ app.factory('feedSrv', function ($http, $log, $q) {
         }
     }
 
+    //new function - attempting to add new user
+    populateNewUser = function (igObject, ourDB) {
+        var async = $q.defer();
+        var path = "https://linqin.herokuapp.com/users/"; //user array
+        
+            newIgObject = igObject;
+            nullifyIgLink(newIgObject);
+            
+            ourDB.data.users.push(newIgObject);
+            
+            $http.patch(path, ourDB.data.users[userIndex]).then(function (response) {
+                console.log("Hi! sync");
+                async.resolve(currentFeed);
+            },
+                function (error) {
+                    console.error(error);
+                    async.reject("faild to patch");
+                })
+        
+
+        currentFeed.splice(0, currentFeed.length);
+        DB.data.users[userIndex].data.forEach(function (plainObj) {
+            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+            currentFeed.push(post);
+        })
+        return async.promise;
+
+
+
+    }
 
     updateDB = function (igObject, ourDB, userIndex) {
         var async = $q.defer();
@@ -170,6 +208,8 @@ app.factory('feedSrv', function ($http, $log, $q) {
         return async.promise;
 
     }
+
+  
 
     function VPost(image, link) {
         this.image = image;
