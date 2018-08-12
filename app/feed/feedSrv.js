@@ -206,7 +206,8 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     nullifyIgLink = function (newIgObject) {
         for (i=0; i<newIgObject.data.length; i++) {
-            newIgObject.data.users[userIndex].data.link=null;
+            newIgObject.data.users[userIndex].data.link="";
+            
         }
 
 
