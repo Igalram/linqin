@@ -1,19 +1,19 @@
 <div class="container">
 
-    <h1>hello viewer!!!!</h1>
-    <!-- <div class="userInfo">
+    <h1 class="text-center">hello viewer :)</h1>
+    <div class="userInfo">
         <p>
-            <img ng-src="{{profilePicture}}" />
+            <img src="{{profilePicture}}" />
         </p>
         <p>{{userName}}</p>
         <p>{{fullName}}</p>
-    </div> -->
+    </div>
     <hr>
     <div class="row wrapper">
         <div class="col-md-4" ng-repeat="post in userFeed">
             <div class="square-box">
                 <a href="{{post.link}}" target="_blank">
-                    <img ng-src="{{post.image}}" class="img-responsive">
+                    <img ng-src="{{post.image}}" class="img-responsive" ng-class="{grayscale: post.link == ''}">
                 </a>
             </div>
 

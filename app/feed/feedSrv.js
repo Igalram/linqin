@@ -9,7 +9,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
     var DB = {};
     var currentFeed = [];
     var userFeed = [];
-
+    var profilePicture = 'test';
 
 
 
@@ -187,7 +187,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
                 var viewerDB = response;
 
                 for (i = 0; i < viewerDB.data.users.length; i++) {
-                    if (username === viewerDB.data.users[i].data[0].user.username) {
+                    if (username == viewerDB.data.users[i].data[0].user.username) {
                         viewerDB.data.users[i].data.forEach(function (obj) {
                             var vPost = new VPost(obj.images.standard_resolution.url, obj.link);
                             userFeed.push(vPost);
@@ -225,7 +225,10 @@ app.factory('feedSrv', function ($http, $log, $q) {
         getDB: getDB,
         currentFeed: currentFeed,
         userFeed : userFeed,
-        addLinq: addLinq
+        addLinq: addLinq,
+        profilePicture: function(){
+            return profilePicture;
+        } 
     }
 
 
