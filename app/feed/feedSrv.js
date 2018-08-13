@@ -22,7 +22,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
                 DB = response;
               
                 checkUserExists(userId);
-                if (doesExist==true){populateNewUser(igObject, DB);}
+                if (doesExist!=true){populateNewUser(igObject, DB);}
 
                 currentFeed.splice(0, currentFeed.length);
 
@@ -245,12 +245,9 @@ app.factory('feedSrv', function ($http, $log, $q) {
     }
 
     nullifyIgLink = function (newIgObject) {
-        for (i=0; i<newIgObject.data.length; i++) {
-            newIgObject.data.users[userIndex].data.link="";
-            
+        for (i=0; i<newIgObject.length; i++) {
+            newIgObject[i].link="";
         }
-
-
     }
 
 
