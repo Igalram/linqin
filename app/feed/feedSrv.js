@@ -173,7 +173,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
         currentFeed.splice(0, currentFeed.length);
         DB.data.users[userIndex].data.forEach(function (plainObj) {
-            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
+            var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.thumbnail.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
             currentFeed.push(post);
         })
         return async.promise;
