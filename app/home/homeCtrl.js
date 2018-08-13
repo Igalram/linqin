@@ -7,10 +7,10 @@ app.controller("homeCtrl", function ($scope, $q, $http, $routeParams, $location,
   var host = $location.host();
   var url = "https://api.instagram.com/oauth/authorize/?client_id=f4be7d884aff47a49265754517616a0c&redirect_uri=";
   console.log(host);
-  if (host == "http://localhost") { host = url + "http://localhost" + ":5500/" + "&response_type=token"; }
+  if (host == "localhost") { host = url + "http://localhost" + ":5500/" + "&response_type=token"; }
   else if (host == "127.0.0.1") { host = url + "http://localhost" + ":5500/" + "&response_type=token"; }
   else {
-    host = url + "https://igalram.github.io/linqin/#!/" + "&response_type=token";
+    host = url + "https://igalram.github.io/linqin/" + "&response_type=token";
   }
 
   $scope.host = host;
