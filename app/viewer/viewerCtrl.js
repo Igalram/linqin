@@ -8,5 +8,7 @@ app.controller('viewerCtrl', function ($scope, $q, $http, $location, $routeParam
             getDbByName(username);
             $scope.userFeed = feedSrv.userFeed; 
 
+        
+
 
 });

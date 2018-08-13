@@ -11,18 +11,22 @@ app.factory('feedSrv', function ($http, $log, $q) {
     var userFeed = [];
     var profilePicture = 'test';
     var doesExist = false;
+    var userInfo = {};
 
 
 
     getDB = function () {
+        var async = $q.defer();
 
         $http.get(dbURL).then(
             function (response) {
-
+                console.log("phase 2");
                 DB = response;
 
                 checkUserExists(userId);
-                if (doesExist != true) { populateNewUser(igObject, DB); }
+                if (doesExist != true) { 
+                    populateNewUser(igObject, DB); 
+                }
 
                 currentFeed.splice(0, currentFeed.length);
 
@@ -32,9 +36,10 @@ app.factory('feedSrv', function ($http, $log, $q) {
                 })
                 console.log("srv.currentFeed=" + currentFeed);
                 updateDB(igObject, DB, userIndex).then(function (response) {
-                    return;
+                    async.resolve({feed: currentFeed, user: userInfo});
                 }, function (error) {
                     console.error(error);
+                    async.reject();
                 });
 
             },
@@ -42,31 +47,42 @@ app.factory('feedSrv', function ($http, $log, $q) {
                 console.log("err");
             });
 
-        return currentFeed;
+        return async.promise;
     }
 
+    function getAllInfo() {
+        var async = $q.defer();
 
-    if (token) {
-        $http.get(request).then(function (response) {
+        if (token) {
+            $http.get(request).then(function (response) {
 
-            //userInfo
-            var userInfo = response.data.data[0].user;
-            userName = userInfo.username;
-            userId = userInfo.id;
-            userExists = false;
+                //userInfo
+                //var userInfo = response.data[0].user;
+                userInfo = response.data.data[0].user;
+                // userName = userInfo.username;
+                userId = userInfo.id;
+                // userExists = false;
 
-            profilePicture = userInfo.profile_picture;
-            fullName = userInfo.fullName;
+                // profilePicture = userInfo.profile_picture;
+                // fullName = userInfo.fullName;
 
 
-            content = response.data;
-            igObject = content;
+                content = response.data;
+                igObject = content;
+                console.log("phase 1");
 
-            getDB();
+                getDB().then(function (data) {
+                    console.log("phase 3");
+                    async.resolve(data);
+                });
 
-        }, function (error) {
-            console.error(error);
-        })
+            }, function (error) {
+                console.error(error);
+                async.reject();
+            })
+        }
+
+        return async.promise;
     }
 
 
@@ -193,19 +209,20 @@ app.factory('feedSrv', function ($http, $log, $q) {
             ourDB.data.users[userIndex].data = newDB;
             $http.patch(path, ourDB.data.users[userIndex]).then(function (response) {
                 console.log("Hi! sync");
-                async.resolve(currentFeed);
+                
             },
                 function (error) {
                     console.error(error);
                     async.reject("faild to patch");
                 })
         }
-
         currentFeed.splice(0, currentFeed.length);
         DB.data.users[userIndex].data.forEach(function (plainObj) {
             var post = new Post(plainObj.id, plainObj.user.id, plainObj.images.standard_resolution.url, plainObj.created_time, plainObj.likes.count, plainObj.link, plainObj.location);
             currentFeed.push(post);
         })
+        async.resolve(currentFeed);
+
         return async.promise;
 
     }
@@ -270,6 +287,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
         getDB: getDB,
         currentFeed: currentFeed,
         userFeed: userFeed,
+        userInfo: userInfo,
         addLinq: addLinq,
         profilePicture: function () {
             return profilePicture;
@@ -279,7 +297,8 @@ app.factory('feedSrv', function ($http, $log, $q) {
         },
         fullName: function () {
             return fullName;
-        }
+        },
+        getAllInfo: getAllInfo
     }
 
 

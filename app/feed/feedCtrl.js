@@ -1,9 +1,10 @@
 
-app.controller('feedCtrl', function ($scope, $timeout, $q, $http, $location, $routeParams, feedSrv) {
+app.controller('feedCtrl', function ($scope, $q, $http, $location, $routeParams, feedSrv) {
 
 
 
     $scope.content = [];
+    $scope.currentFeed = [];
     $scope.userInfo = {};
     
 
@@ -14,14 +15,14 @@ app.controller('feedCtrl', function ($scope, $timeout, $q, $http, $location, $ro
 
     $scope.token = feedSrv.token || localStorage.getItem("token");
     console.log("$scope.token in feedCtrl.js=" + $scope.token);
-
     
-    $timeout(function(){
-        $scope.currentFeed = feedSrv.currentFeed;
-        $scope.profilePicture = feedSrv.profilePicture();
-        $scope.userName = feedSrv.userName();
-        $scope.fullName = feedSrv.fullName();
-    },1000)
+    feedSrv.getAllInfo().then(function (data) {
+        console.log(data);
+        $scope.currentFeed = data.feed;
+        $scope.userInfo = data.user;
+    });
+
+   
     $scope.profilePicture = '';
     $scope.userName = '';
     $scope.fullName = '';
