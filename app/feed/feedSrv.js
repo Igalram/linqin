@@ -2,7 +2,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     token = localStorage.getItem("token");
 
-  
+
 
     var request = "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + token;
     var dbURL = "https://linqin.herokuapp.com/db";
@@ -18,11 +18,11 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
         $http.get(dbURL).then(
             function (response) {
-               
+
                 DB = response;
-              
+
                 checkUserExists(userId);
-                if (doesExist!=true){populateNewUser(igObject, DB);}
+                if (doesExist != true) { populateNewUser(igObject, DB); }
 
                 currentFeed.splice(0, currentFeed.length);
 
@@ -48,7 +48,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     if (token) {
         $http.get(request).then(function (response) {
-           
+
             //userInfo
             var userInfo = response.data.data[0].user;
             userName = userInfo.username;
@@ -102,13 +102,13 @@ app.factory('feedSrv', function ($http, $log, $q) {
         for (i = 0; i < DB.data.users.length; i++) {
             if (userId === DB.data.users[i].id) {
                 userIndex = i;
-                doesExist= true;
+                doesExist = true;
                 return userIndex;
             }
 
         }
 
-        userIndex = i+1;
+        userIndex = i + 1;
         return userIndex;
 
         console.log("false");
@@ -118,16 +118,20 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     //get linq
     function addLinq(linq, $index) {
-      
+
         var path = "https://linqin.herokuapp.com/users/" + userId; //userId
         var data = DB.data.users[userIndex];
         data['data'][$index]['link'] = linq;
+        if (isURL(linq)) {
+            $http.patch(path, data).then(function (response) {
+                getDB();
+            }, function (error) { console.error(error); }
 
-        $http.patch(path, data).then(function (response) {
-            getDB();
-        }, function (error) { console.error(error); }
-
-        )
+            )
+        }
+        else {
+            window.alert("URL  not valid");
+        }
     }
 
 
@@ -144,9 +148,6 @@ app.factory('feedSrv', function ($http, $log, $q) {
                 }
 
             }
-
-
-
         }
     }
 
@@ -154,21 +155,21 @@ app.factory('feedSrv', function ($http, $log, $q) {
     populateNewUser = function (igObject, ourDB) {
         var async = $q.defer();
         var path = "https://linqin.herokuapp.com/users/"; //user array
-        
-            newIgObject = igObject;
-            nullifyIgLink(newIgObject);
-            
-            ourDB.data.users.push(newIgObject);
-            
-            $http.patch(path, ourDB.data.users[userIndex]).then(function (response) {
-                console.log("Hi! sync");
-                async.resolve(currentFeed);
-            },
-                function (error) {
-                    console.error(error);
-                    async.reject("faild to patch");
-                })
-        
+
+        newIgObject = igObject;
+        nullifyIgLink(newIgObject);
+
+        ourDB.data.users.push(newIgObject);
+
+        $http.patch(path, ourDB.data.users[userIndex]).then(function (response) {
+            console.log("Hi! sync");
+            async.resolve(currentFeed);
+        },
+            function (error) {
+                console.error(error);
+                async.reject("faild to patch");
+            })
+
 
         currentFeed.splice(0, currentFeed.length);
         DB.data.users[userIndex].data.forEach(function (plainObj) {
@@ -209,7 +210,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
 
     }
 
-  
+
 
     function VPost(image, link) {
         this.image = image;
@@ -221,7 +222,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
     getDbByName = function (username) {
 
         userFeed.splice(0, userFeed.length);
-        
+
         $http.get(dbURL).then(
             function (response) {
                 var viewerDB = response;
@@ -245,13 +246,20 @@ app.factory('feedSrv', function ($http, $log, $q) {
     }
 
     nullifyIgLink = function (newIgObject) {
-        for (i=0; i<newIgObject.length; i++) {
-            newIgObject[i].link="";
+        for (i = 0; i < newIgObject.length; i++) {
+            newIgObject[i].link = "";
         }
     }
 
 
-
+    // code to validate URL:
+    function isURL(str) {
+        var res = str.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        if(res == null)
+            return false;
+        else
+            return true;
+    }
 
 
 
@@ -261,15 +269,15 @@ app.factory('feedSrv', function ($http, $log, $q) {
         //        getOffset: getOffset,
         getDB: getDB,
         currentFeed: currentFeed,
-        userFeed : userFeed,
+        userFeed: userFeed,
         addLinq: addLinq,
-        profilePicture: function(){
+        profilePicture: function () {
             return profilePicture;
         },
-        userName: function() {
+        userName: function () {
             return userName;
         },
-        fullName: function() {
+        fullName: function () {
             return fullName;
         }
     }
