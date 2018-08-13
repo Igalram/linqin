@@ -265,7 +265,13 @@ app.factory('feedSrv', function ($http, $log, $q) {
         addLinq: addLinq,
         profilePicture: function(){
             return profilePicture;
-        } 
+        },
+        userName: function() {
+            return userName;
+        },
+        fullName: function() {
+            return fullName;
+        }
     }
 
 
