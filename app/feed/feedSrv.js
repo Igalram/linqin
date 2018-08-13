@@ -9,7 +9,7 @@ app.factory('feedSrv', function ($http, $log, $q) {
     var DB = {};
     var currentFeed = [];
     var userFeed = [];
-    var profilePicture = 'test';
+    var profilePicture = '';
     var doesExist = false;
     var userInfo = {};
 
@@ -59,12 +59,12 @@ app.factory('feedSrv', function ($http, $log, $q) {
                 //userInfo
                 //var userInfo = response.data[0].user;
                 userInfo = response.data.data[0].user;
-                // userName = userInfo.username;
+                userName = userInfo.username;
                 userId = userInfo.id;
                 // userExists = false;
 
-                // profilePicture = userInfo.profile_picture;
-                // fullName = userInfo.fullName;
+                profilePicture = userInfo.profile_picture;
+                fullName = userInfo.fullName;
 
 
                 content = response.data;
@@ -293,10 +293,10 @@ app.factory('feedSrv', function ($http, $log, $q) {
             return profilePicture;
         },
         userName: function () {
-            return userName;
+            return userInfo.userName;
         },
         fullName: function () {
-            return fullName;
+            return userInfo.fullName;
         },
         getAllInfo: getAllInfo
     }
