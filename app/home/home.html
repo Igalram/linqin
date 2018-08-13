@@ -10,16 +10,15 @@
 
 
 <div class="container">
-
-
     <div>
         <article class="card-body mx-auto" style="max-width: 400px;">
             <p class="text-center">Start (or modify) your gallery</p>
             <p>
-                <!--<a id="authenticatelink" href="https://api.instagram.com/oauth/authorize/?client_id=f4be7d884aff47a49265754517616a0c&redirect_uri=http://localhost:5500/&response_type=token" class="btn btn-block btn-facebook"> <i class="fab fa-instagram"></i>Login with Instagram</a>-->
-                <a id="authenticatelink" href="https://api.instagram.com/oauth/authorize/?client_id=f4be7d884aff47a49265754517616a0c&redirect_uri=http://"
-                    +{{host}}+ "/&response_type=token" class="btn btn-block btn-facebook">
+                <div>HOST is {{host}}</div>
+                <a id="authenticatelink" href="https://api.instagram.com/oauth/authorize/?client_id=f4be7d884aff47a49265754517616a0c&redirect_uri=https://igalram.github.io/linqin/&response_type=token"
+                    class="btn btn-block btn-facebook">
                     <i class="fab fa-instagram"></i>Login with Instagram</a>
+                    <div>HOST is {{host}}</div>
             </p>
 
             <p class="text-center">
