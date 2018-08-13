@@ -5,10 +5,16 @@ app.controller("homeCtrl", function ($scope, $q, $http, $routeParams, $location,
 
   //new code for dynamic redirect
   var host = $location.host();
-  $scope.host = host;
-  if (host == "localhost") { host += ":5500"; }
-  else if (host == "127.0.0.1") { host += ":5500"; }
+  var url = "https://api.instagram.com/oauth/authorize/?client_id=f4be7d884aff47a49265754517616a0c&redirect_uri=";
   console.log(host);
+  if (host == "http://localhost") { host = url + "http://localhost" + ":5500/" + "&response_type=token"; }
+  else if (host == "127.0.0.1") { host = url + "http://localhost" + ":5500/" + "&response_type=token"; }
+  else {
+    host = url + "https://igalram.github.io/linqin/#!/" + "&response_type=token";
+  }
+
+  $scope.host = host;
+  console.log($scope.host);
 
 
   if (token) {
